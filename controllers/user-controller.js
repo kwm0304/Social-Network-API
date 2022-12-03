@@ -8,7 +8,7 @@ const userController = {
                 path: 'thoughts',
                 select: '-_v'
             })
-            .select(-_v)
+            .select('-_v')
             .sort({ _id: -1 })
             .then(dbUserData => res.json(dbUserData))
             .catch(err => {
@@ -20,12 +20,13 @@ const userController = {
     //get one user by id
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
+        .populate({
+            path: 'thoughts',
+            select: '-_v'
+        })
+            .select('-_v')
             .then(dbUserData => {
-                //if no user found send 404
-                if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id!'})
-                    return;
-                }
+
                 res.json(dbUserData)
             })
             .catch(err => {
