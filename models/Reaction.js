@@ -1,6 +1,7 @@
 const { ObjectId } = require('bson');
-const { Schema, model } = require('mongoose')
+const { Schema } = require('mongoose')
 
+//Formatted as model -> change to schema
 const Reactionschema = new Schema(
     {
         reactionId: {
@@ -10,7 +11,7 @@ const Reactionschema = new Schema(
         reactionBody: {
             type: String,
             required: true,
-            max: 280
+            maxLength: 280
         },
         username: [
             {
@@ -23,11 +24,12 @@ const Reactionschema = new Schema(
             type: Date,
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
+            //Make date format in util/
       }
     }
 )
 //This isn't a model, only used for the reaction field subdoc in thought model
 
 
-const Reaction = model('Reaction', Reactionschema)
+const Reaction = (Reactionschema)
 module.exports = Reaction;
