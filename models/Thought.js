@@ -1,18 +1,15 @@
-const { Schema, model } = require('mongoose')
-var getUnixTime = require('date-fns/getUnixTime');
+const { Schema, model } = require('mongoose');
+const { format } = require('path');
 const { timeStamp } = require('./../utils/dateFormat');
 // const Reaction = mongoose.model('Reaction', reactionSchema)
 
-var validateEmail = function(email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email)
-};
+
 
 const ReactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: new ObjectId()
+            default: () => new ObjectId()
         },
         reactionBody: {
             type: String,
@@ -57,7 +54,7 @@ const ThoughtSchema = new Schema(
             type: String,
             required: true
         },
-        reactions: [reactionArray]
+        // reactions: [reactionArray]
  },
  {
         toJSON: {

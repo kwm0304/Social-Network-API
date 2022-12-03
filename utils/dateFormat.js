@@ -1,5 +1,5 @@
-var getUnixTime = require('date-fns/getUnixTime')
+// var getUnixTime = require('date-fns/getUnixTime')
 
-var timestamp = getUnixTime(date)
+// date = format(new Date())
 
-module.exports = dateFormat
+// module.exports = dateFormat
