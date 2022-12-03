@@ -41,6 +41,20 @@ const thoughtController = {
             .catch(err => res.json(err));        
     },
 
+    //update thought
+    updatThought(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId},
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+        .then((Thought => {
+            if (!Thought) {
+                res.status(404).json({ message: 'No thought found with this id!'})
+            } else res.status(200).json(Thought)
+            .catch ((err) => res.status(500).json(err))
+        }))
+    },    
     //delete
     deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtId })
@@ -57,7 +71,12 @@ const thoughtController = {
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'No user found with this id!' })
+                    return
                 }
+                res.json(dbUserData)
             })
+            .catch(err => res.json(err))
     }
 }
+
+module.exports = thoughtController
