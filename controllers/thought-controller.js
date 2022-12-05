@@ -18,7 +18,7 @@ const thoughtController = {
     },
     
     //get one thought by _id
-    getThoughtById(req, res) {
+    getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.thoughtId })
             .then((thoughts) => {
                 if (!thoughts) {
