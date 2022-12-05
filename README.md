@@ -17,4 +17,7 @@ To test routes follow installation instructions then run npm start on the comman
 
 ## Link 
 Repo Link: https://github.com/kwm0304/Social-Network-API
-Video Link: 
+Video Link:  https://drive.google.com/file/d/1zH9SdgLxbwh5quEuK66MS1h40JsctzQG/view
+
+## License
+[License](https://github.com/kwm0304/Social-Network-API/blob/main/LICENSE)
