@@ -100,15 +100,16 @@ const thoughtController = {
 
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
-            { _id: params.thoughtId },
-            { $pull: { reactions: { reactionId: req.params.reactionId } }},
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.body.reactionId } }},
+            { runValidators: true, new: true }
         )
         .then(thoughts => {
             if (!thoughts) {
                 res.status(404).json({ message: 'No thought found with this id!' })
                 return
             }
-            res.json(Thought)
+            res.json(thoughts)
         })
         .catch(err => res.json(err))
     }
