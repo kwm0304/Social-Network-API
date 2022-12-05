@@ -8,9 +8,9 @@ const thoughtController = {
                 select: '-__v'
             })
             .select('-__v')
-            .then(thoughts => {
-                res.json(thoughts);
-            })
+            .sort({ _id: -1 })
+            .then(thoughts => 
+                res.json(thoughts))
             .catch(err => {
                 console.log(err);
                 res.status(400).json(err);
@@ -33,7 +33,7 @@ const thoughtController = {
         Thought.create(body)
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    { _id: req.body.userId},
+                    { _id: body.userId},
                     { $push: { thoughts: _id } },
                     { new: true }
                 )

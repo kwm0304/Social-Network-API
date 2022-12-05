@@ -1,8 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { timeStamp } = require('./../utils/dateFormat');
-// const Reaction = mongoose.model('Reaction', reactionSchema)
-
-
+const format = require('date-fns/format')
 
 const ReactionSchema = new Schema(
     {
@@ -22,7 +19,7 @@ const ReactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)
+            get: createdAtVal => format(createdAtVal, 'MM/dd/yyyy')
             //Make date format in util/
       }
     },
@@ -45,7 +42,7 @@ const ThoughtSchema = new Schema(
         createdAt: {
               type: Date,
               default: Date.now,
-              get: createdAtVal => dateFormat(createdAtVal)
+              get: createdAtVal => format(createdAtVal, 'MM/dd/yyyy')
         },
         userName: {
             type: String,
