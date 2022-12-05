@@ -1,3 +1,4 @@
+const { errorMonitor } = require("events");
 const { User } = require("../models");
 
 const userController = {
@@ -67,7 +68,21 @@ const userController = {
             .catch(err => res.status(400).json(err))
     },
 
-    //Bonus: remove users associated thoughts on delete
+    //add friend
+    createFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.id },
+            { $addToSet: { friends: req.params.friendId }},
+            { runValidators: true, new: true }
+        )
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id!' })
+                return
+            } res.json(dbUserData)
+        })
+        .catch(err => res.status(400).json(errorMonitor))
+    }
 };
 
 module.exports = userController;
